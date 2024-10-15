@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <main class="container participant-page">
+
+        <div class="row">
+            <div class="col-6">
+                <img src="{{ participant.image }}" class="participant-image" alt=""/>
+            </div>
+            <div class="col-6 d-flex flex-md-column gap-md-3">
+
+                <h1>{{ participant.name }}</h1>
+
+                <span>Описание: {{ participant.description }}</span>
+
+                <span>Телефон: {{ participant.phone }}</span>
+
+                <a href="/" class="btn btn-primary my-4 w-25 return-btn">
+                    Домой
+                </a>
+
+            </div>
+        </div>
+
+    </main>
+{% endblock content %}
