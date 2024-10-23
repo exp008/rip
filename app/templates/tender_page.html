@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <main class="container">
+
+        <h3  class="text-center">Черновой тендер</h3>
+
+         <div class="form-group">
+            <label class="form-label">Описание</label>
+            {% if tender.description %}
+                <textarea placeholder="Введите описание" disabled type="text" class="form-control" style="width: 350px;min-height: 150px" value="">{{ tender.description }}</textarea>
+            {% else %}
+                <textarea placeholder="Введите описание" disabled type="text" class="form-control" style="width: 250px"></textarea>
+            {% endif %}
+        </div>
+
+         <div class="form-group">
+            <label class="form-label">Дата</label>
+            {% if tender.date %}
+                <input placeholder="Введите дату" disabled type="text" class="form-control" style="width: 250px" value="{{ tender.date }}">
+            {% else %}
+                <input placeholder="Введите дату" disabled type="text" class="form-control" style="width: 250px">
+            {% endif %}
+        </div>
+
+        <form method="post" action="{% url 'delete_tender' tender.id %}">
+            {% csrf_token %}
+                <button class="btn btn-danger delete-draft-tender-btn" type="submit">
+                    Удалить
+                </button>
+            </a>
+        </form>
+
+        <h4 class="text-center">Участники</h4>
+
+        <div class="cards-wrapper d-flex flex-column">
+
+            {% for participant in tender.get_participants %}
+
+                {% include "participant_card.html" %}
+
+            {% endfor %}
+
+        </div>
+
+    </main>
+{% endblock content %}
